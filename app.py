@@ -122,3 +122,39 @@ with contact_col2:
                         st.error("❌ Technical error. Please email us directly.")
                 except Exception as e:
                     st.error(f"Connection Error: {e}")
+                    st.divider()
+
+# --- AI CHATBOT SECTION ---
+st.markdown("<h3 style='text-align: center;'>🤖 Chat with Logic Flux AI</h3>", unsafe_allow_html=True)
+
+# 1. Create a "memory" for the chat so it doesn't disappear when you type
+if "messages" not in st.session_state:
+    st.session_state.messages = [
+        {"role": "assistant", "content": "Hi! I'm the Logic Flux AI. How can I help you automate your business today?"}
+    ]
+
+# 2. Display previous chat messages
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# 3. The Chat Input Box
+if prompt := st.chat_input("Ask me about AI automation..."):
+    
+    # Show what the user typed
+    with st.chat_message("user"):
+        st.markdown(prompt)
+    
+    # Save user message to memory
+    st.session_state.messages.append({"role": "user", "content": prompt})
+
+    # 4. The Bot's Response (Simulated for now)
+    # Later, we will connect this to a real AI brain!
+    bot_response = f"That is a great point about '{prompt}'. At Logic Flux, we build custom AI agents to handle exactly that type of workflow. Send us a message through the form above to discuss it!"
+    
+    # Show the bot's response
+    with st.chat_message("assistant"):
+        st.markdown(bot_response)
+        
+    # Save bot message to memory
+    st.session_state.messages.append({"role": "assistant", "content": bot_response})
