@@ -158,3 +158,4 @@ if prompt := st.chat_input("Ask me about AI automation..."):
         
     # Save bot message to memory
     st.session_state.messages.append({"role": "assistant", "content": bot_response})
+
