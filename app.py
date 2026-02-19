@@ -1,13 +1,15 @@
 import streamlit as st
 import requests
 
-# 1. PAGE CONFIGURATION (Must be the VERY FIRST command)
 st.set_page_config(
-    page_title="Logic Flux | AI Automation",
+    page_title="Logic Flux | AI Automation Agency",
     page_icon="⚡",
-    layout="wide" 
+    layout="wide",
+    menu_items={
+        'Get Help': 'mailto:inquiry@logic-flux.in',
+        'About': "# Logic Flux: Premium AI Automation and Digital Systems."
+    }
 )
-
 # ... (keep the rest of your code exactly the same) ...
 # 2. CUSTOM CSS (Combines your dark theme with the glowing Hero text)
 custom_css = """
@@ -232,5 +234,6 @@ with chat_container:
             if st.button("⬅️ Start Over"):
                 st.session_state.chat_step = "greeting"
                 st.rerun()
+
 
 
