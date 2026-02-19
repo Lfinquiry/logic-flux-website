@@ -105,7 +105,10 @@ st.divider() # Draws a clean line before the next section
 
 # 6. CONTACT FORM SECTION
 st.markdown("<h3 style='text-align: center;'>Start Your Transformation</h3>", unsafe_allow_html=True)
-# ... (the rest of your contact form code continues here) ...
+
+# 👇 ADD THIS EXACT LINE RIGHT HERE 👇
+contact_col1, contact_col2 = st.columns([1, 1.5])
+
 
 with contact_col1:
     st.info("📧 **Direct Contact**")
@@ -229,4 +232,5 @@ with chat_container:
             if st.button("⬅️ Start Over"):
                 st.session_state.chat_step = "greeting"
                 st.rerun()
+
 
