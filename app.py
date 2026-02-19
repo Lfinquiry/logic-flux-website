@@ -104,6 +104,51 @@ with col_service3:
 st.write("")
 st.write("")
 st.divider() # Draws a clean line before the next section
+# 5.5 THE ROI CALCULATOR (Lead Magnet)
+st.divider()
+st.markdown("<h2 style='text-align: center; color: #92FE9D;'>💸 The Cost of Doing Nothing</h2>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #A0AEC0; margin-bottom: 30px;'>Use the sliders below to see how much money manual tasks are costing your business every month.</p>", unsafe_allow_html=True)
+
+# Create a sleek container for the calculator
+calc_container = st.container(border=True)
+
+with calc_container:
+    # Sliders for user input
+    calc_col1, calc_col2 = st.columns(2)
+    
+    with calc_col1:
+        employees = st.slider("Number of Employees doing manual work", min_value=1, max_value=50, value=5)
+        hours_wasted = st.slider("Hours wasted per employee (per week)", min_value=1, max_value=40, value=10)
+        
+    with calc_col2:
+        hourly_wage = st.slider("Average Hourly Wage (in ₹)", min_value=100, max_value=2000, value=500, step=100)
+        
+        # The Math behind the scenes
+        total_hours_monthly = employees * hours_wasted * 4  # 4 weeks in a month
+        wasted_money_monthly = total_hours_monthly * hourly_wage
+        
+        # AI Cost (You can change this later! Let's say your bot costs ₹25,000/month)
+        ai_monthly_cost = 25000 
+        monthly_savings = wasted_money_monthly - ai_monthly_cost
+
+    st.write("---")
+    
+    # The Big Reveal
+    result_col1, result_col2, result_col3 = st.columns(3)
+    
+    with result_col1:
+        st.metric(label="Current Monthly Cost", value=f"₹{wasted_money_monthly:,}")
+        
+    with result_col2:
+        st.metric(label="Logic Flux AI Cost", value=f"₹{ai_monthly_cost:,}")
+        
+    with result_col3:
+        if monthly_savings > 0:
+            st.metric(label="Your Monthly Savings", value=f"₹{monthly_savings:,}", delta=f"₹{monthly_savings:,} Saved!")
+        else:
+            st.metric(label="Your Monthly Savings", value="₹0", delta="Try adjusting the sliders!")
+
+st.write("") # Add some space before the contact form
 
 # 6. CONTACT FORM SECTION
 st.markdown("<h3 style='text-align: center;'>Start Your Transformation</h3>", unsafe_allow_html=True)
@@ -234,6 +279,7 @@ with chat_container:
             if st.button("⬅️ Start Over"):
                 st.session_state.chat_step = "greeting"
                 st.rerun()
+
 
 
 
